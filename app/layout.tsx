@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { AuthProvider } from "../components/AuthProvider";
@@ -7,8 +7,8 @@ import { Header } from "../components/Header";
 import { VisitTracker } from "../components/VisitTracker";
 import { TranslationsProvider } from "../lib/i18n/TranslationsProvider";
 
-const oswald = Oswald({
-  variable: "--font-oswald",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${oswald.variable} ${inter.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <body>
