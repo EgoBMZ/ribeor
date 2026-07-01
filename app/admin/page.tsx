@@ -24,7 +24,7 @@ export default function AdminDashboardPage() {
   const [visits, setVisits] = useState<number>(0);
   const [usersCount, setUsersCount] = useState<number>(0);
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [projectsCount, setProjectsCount] = useState<number>(0);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function AdminDashboardPage() {
         setVisits(v);
         setUsersCount(u);
         setPosts(pts);
-        setProjectsCount(prjs.length);
+        setProjects(prjs);
       } catch (error) {
         console.error("Error loading stats:", error);
       } finally {
@@ -52,6 +52,12 @@ export default function AdminDashboardPage() {
   // Sort posts by views to find the top ones
   const topPosts = [...posts]
     .filter(post => post.views && post.views > 0)
+    .sort((a, b) => (b.views || 0) - (a.views || 0))
+    .slice(0, 5);
+
+  // Sort projects by views to find the top ones
+  const topProjects = [...projects]
+    .filter(project => project.views && project.views > 0)
     .sort((a, b) => (b.views || 0) - (a.views || 0))
     .slice(0, 5);
 
@@ -79,7 +85,7 @@ export default function AdminDashboardPage() {
     },
     { 
       name: "Proyectos Añadidos", 
-      value: projectsCount, 
+      value: projects.length, 
       icon: <FolderGit2 className="text-emerald-500" size={24} />, 
       bg: "bg-emerald-500/10",
       description: "En tu portafolio"
@@ -128,40 +134,87 @@ export default function AdminDashboardPage() {
       {/* Main Content Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Top Posts Table */}
-        <div className="lg:col-span-2 flex flex-col gap-4 p-6 rounded-2xl border border-border-color bg-bg-primary">
-          <h2 className="text-xl font-bold text-text-primary flex items-center gap-2">
-            <Eye size={20} className="text-accent-pink" /> Artículos Más Leídos (Top 5)
+        {/* Top Content (Posts & Projects) */}
+        <div className="lg:col-span-2 flex flex-col gap-6 p-6 rounded-2xl border border-border-color bg-bg-primary">
+          <h2 className="text-xl font-bold text-text-primary flex items-center gap-2 border-b border-border-color pb-4">
+            <Eye size={20} className="text-accent-pink animate-pulse" /> Rendimiento de Contenido (Top 5)
           </h2>
-          {topPosts.length === 0 ? (
-            <div className="py-10 text-center text-text-secondary text-sm border border-dashed border-border-color rounded-xl">
-              Aún no hay visualizaciones registradas en tus artículos.
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Column 1: Top Posts */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-sm uppercase font-bold tracking-wider text-text-meta flex items-center gap-2">
+                <FileText size={16} className="text-accent-pink" /> Artículos más leídos
+              </h3>
+              {topPosts.length === 0 ? (
+                <div className="py-8 text-center text-text-secondary text-xs border border-dashed border-border-color rounded-xl">
+                  Aún no hay vistas registradas en tus artículos.
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="border-b border-border-color text-text-meta uppercase text-[10px] tracking-wider">
+                        <th className="pb-2 font-bold">Artículo</th>
+                        <th className="pb-2 font-bold text-right">Vistas</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border-color">
+                      {topPosts.map((post, i) => (
+                        <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
+                          <td className="py-2.5 font-medium text-text-primary max-w-[150px] sm:max-w-[200px] truncate">
+                            <Link href={`/blog/${post.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
+                              {post.title} <ArrowUpRight size={12} className="opacity-40" />
+                            </Link>
+                          </td>
+                          <td className="py-2.5 text-right font-bold text-accent-pink font-mono text-sm">
+                            {post.views || 0}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-border-color text-text-meta uppercase text-xs tracking-wider">
-                    <th className="pb-3 font-bold">Título</th>
-                    <th className="pb-3 font-bold text-right">Visualizaciones</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-color">
-                  {topPosts.map((post, i) => (
-                    <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
-                      <td className="py-3 font-medium text-text-primary max-w-xs sm:max-w-sm truncate">
-                        <Link href={`/blog/${post.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
-                          {post.title} <ArrowUpRight size={14} className="opacity-40" />
-                        </Link>
-                      </td>
-                      <td className="py-3 text-right font-bold text-accent-pink font-mono text-base">
-                        {post.views || 0}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+            {/* Column 2: Top Projects */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-sm uppercase font-bold tracking-wider text-text-meta flex items-center gap-2">
+                <FolderGit2 size={16} className="text-accent-purple" /> Proyectos más vistos
+              </h3>
+              {topProjects.length === 0 ? (
+                <div className="py-8 text-center text-text-secondary text-xs border border-dashed border-border-color rounded-xl">
+                  Aún no hay vistas registradas en tus proyectos.
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="border-b border-border-color text-text-meta uppercase text-[10px] tracking-wider">
+                        <th className="pb-2 font-bold">Proyecto</th>
+                        <th className="pb-2 font-bold text-right">Vistas</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border-color">
+                      {topProjects.map((project, i) => (
+                        <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
+                          <td className="py-2.5 font-medium text-text-primary max-w-[150px] sm:max-w-[200px] truncate">
+                            <Link href={`/proyectos/${project.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
+                              {project.title} <ArrowUpRight size={12} className="opacity-40" />
+                            </Link>
+                          </td>
+                          <td className="py-2.5 text-right font-bold text-accent-purple font-mono text-sm">
+                            {project.views || 0}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
 
         {/* Quick Actions Panel */}

@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Reglas para posts
+    match /posts/{post} {
+      allow read: if true;
+      allow create, delete: if request.auth != null && request.auth.token.email == 'egobmz@gmail.com';
+      // Permite a cualquiera incrementar las vistas, pero solo al administrador modificar otros campos
+      allow update: if (request.auth != null && request.auth.token.email == 'egobmz@gmail.com')
+                    || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views']));
+    }
+
+    // Reglas para proyectos
+    match /projects/{project} {
+      allow read: if true;
+      allow create, delete: if request.auth != null && request.auth.token.email == 'egobmz@gmail.com';
+      allow update: if (request.auth != null && request.auth.token.email == 'egobmz@gmail.com')
+                    || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views']));
+    }
+
+    // Reglas para métricas y visitas
+    match /metrics/{metric} {
+      allow read: if request.auth != null && request.auth.token.email == 'egobmz@gmail.com';
+      allow write: if true;
+    }
+
+    // Reglas para usuarios y métricas de sesión
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.token.email == 'egobmz@gmail.com';
+      allow write: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == 'egobmz@gmail.com');
+    }
+  }
+}

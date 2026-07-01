@@ -26,7 +26,7 @@ export default function ProyectosPage() {
   return (
     <main className="px-8 py-16 max-w-7xl mx-auto w-full">
       <header className="mb-16">
-        <h1 className="text-6xl md:text-8xl mb-4 font-oswald text-text-primary tracking-tighter">PORTAFOLIO</h1>
+        <h1 className="text-6xl md:text-8xl mb-4 font-oswald text-text-primary tracking-tighter">PROYECTOS</h1>
         <p className="text-xl max-w-2xl text-text-secondary">
           Una colección de aplicaciones web, móviles y experimentos técnicos construidos con tecnologías modernas.
         </p>
@@ -52,28 +52,26 @@ export default function ProyectosPage() {
             const accentColor = colors[idx % colors.length];
 
             return (
-              <div key={project.id} className="flex flex-col h-full bg-bg-card rounded-2xl overflow-hidden border border-border-color hover:-translate-y-2 transition-transform duration-300 group">
-                <Link href={`/proyectos/${project.slug}`} className="no-underline block">
-                  {/* Card cover image or placeholder */}
-                  {project.coverImage ? (
-                    <div className="h-48 w-full relative overflow-hidden">
-                      <img 
-                        src={project.coverImage} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                      />
-                    </div>
-                  ) : (
-                    <div 
-                      className="h-48 w-full flex items-center justify-center p-6 relative overflow-hidden" 
-                      style={{ backgroundColor: accentColor }}
-                    >
-                      <div className="absolute w-32 h-32 rounded-full bg-white opacity-20 -top-10 -right-10"></div>
-                      <div className="absolute w-24 h-24 rounded-lg bg-black opacity-20 -bottom-5 -left-5 rotate-12"></div>
-                      <FolderGit2 size={48} className="text-white relative z-10 opacity-80" />
-                    </div>
-                  )}
-                </Link>
+              <div key={project.id} className="relative flex flex-col h-full bg-bg-card rounded-2xl overflow-hidden border border-border-color hover:-translate-y-2 transition-transform duration-300 group">
+                {/* Card cover image or placeholder */}
+                {project.coverImage ? (
+                  <div className="h-48 w-full relative overflow-hidden">
+                    <img 
+                      src={project.coverImage} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                  </div>
+                ) : (
+                  <div 
+                    className="h-48 w-full flex items-center justify-center p-6 relative overflow-hidden" 
+                    style={{ backgroundColor: accentColor }}
+                  >
+                    <div className="absolute w-32 h-32 rounded-full bg-white opacity-20 -top-10 -right-10"></div>
+                    <div className="absolute w-24 h-24 rounded-lg bg-black opacity-20 -bottom-5 -left-5 rotate-12"></div>
+                    <FolderGit2 size={48} className="text-white relative z-10 opacity-80" />
+                  </div>
+                )}
                 
                 <div className="p-6 flex flex-col flex-1">
                   {/* Tech stack tags */}
@@ -92,17 +90,19 @@ export default function ProyectosPage() {
                     </div>
                   )}
 
-                  <Link href={`/proyectos/${project.slug}`} className="no-underline block group">
-                    <h2 className="text-2xl font-oswald text-text-primary mb-3 leading-tight group-hover:text-accent-purple transition-colors uppercase tracking-tight">
-                      {project.title}
-                    </h2>
-                  </Link>
+                  <h2 className="text-2xl font-oswald text-text-primary mb-3 leading-tight group-hover:text-accent-purple transition-colors uppercase tracking-tight">
+                    {project.title}
+                  </h2>
 
                   <p className="text-sm text-text-secondary mb-6 flex-1 line-clamp-3">
                     {project.description}
                   </p>
 
-                  <div className="flex justify-between items-center mt-auto border-t border-border-color pt-4 gap-4">
+                  {/* Stretched Link Overlay for the whole card */}
+                  <Link href={`/proyectos/${project.slug}`} className="absolute inset-0 z-10" aria-label={`Ver detalles de ${project.title}`} />
+
+                  {/* Footer buttons (higher z-index to overlay stretched link) */}
+                  <div className="relative z-20 flex justify-between items-center mt-auto border-t border-border-color pt-4 gap-4">
                     {/* Action links */}
                     <div className="flex gap-3">
                       {project.repoUrl && (
@@ -110,7 +110,7 @@ export default function ProyectosPage() {
                           href={project.repoUrl} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-text-meta hover:text-accent-purple transition-colors"
+                          className="text-text-meta hover:text-accent-purple transition-colors p-1"
                           title="Ver Código"
                         >
                           <Code2 size={18} />
@@ -121,7 +121,7 @@ export default function ProyectosPage() {
                           href={project.liveUrl} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="text-text-meta hover:text-accent-purple transition-colors"
+                          className="text-text-meta hover:text-accent-purple transition-colors p-1"
                           title="Ver Demo"
                         >
                           <Globe size={18} />
@@ -129,12 +129,11 @@ export default function ProyectosPage() {
                       )}
                     </div>
                     
-                    <Link 
-                      href={`/proyectos/${project.slug}`} 
-                      className="text-xs uppercase tracking-widest text-accent-purple hover:text-accent-pink font-bold no-underline transition-colors shrink-0"
+                    <span 
+                      className="text-xs uppercase tracking-widest text-accent-purple group-hover:text-accent-pink font-bold transition-colors shrink-0"
                     >
                       Ver Detalles →
-                    </Link>
+                    </span>
                   </div>
                 </div>
               </div>

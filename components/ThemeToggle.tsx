@@ -13,10 +13,6 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <div style={{ width: "24px", height: "24px" }} />;
-  }
-
   const currentTheme = theme === "system" ? resolvedTheme : theme;
 
   return (
@@ -32,14 +28,15 @@ export function ThemeToggle() {
         justifyContent: "center",
         padding: "8px",
         borderRadius: "50%",
-        transition: "background-color 0.2s ease"
+        transition: "background-color 0.2s ease",
+        visibility: mounted ? "visible" : "hidden"
       }}
       aria-label="Toggle theme"
       title="Toggle theme"
       onMouseOver={(e) => e.currentTarget.style.backgroundColor = "var(--bg-secondary)"}
       onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
     >
-      {currentTheme === "dark" ? (
+      {mounted && currentTheme === "dark" ? (
         <Sun size={24} />
       ) : (
         <Moon size={24} />

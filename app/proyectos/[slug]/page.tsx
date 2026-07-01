@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Project, getProjectBySlug } from "../../../lib/firebase/firestore";
+import { Project, getProjectBySlug, incrementProjectViews } from "../../../lib/firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { ArrowLeft, Code2, Globe } from "lucide-react";
@@ -17,6 +17,13 @@ export default function ProjectDetailPage() {
       if (typeof params.slug === 'string') {
         const data = await getProjectBySlug(params.slug);
         setProject(data);
+        if (data) {
+          try {
+            await incrementProjectViews(params.slug);
+          } catch (e) {
+            console.error("Failed to increment project views:", e);
+          }
+        }
       }
       setLoading(false);
     }
@@ -24,7 +31,66 @@ export default function ProjectDetailPage() {
   }, [params.slug]);
 
   if (loading) {
-    return <div className="p-20 text-center animate-pulse text-text-meta">Cargando detalles del proyecto...</div>;
+    return (
+      <main className="w-full">
+        {/* Back button skeleton */}
+        <div className="max-w-4xl mx-auto px-8 pt-8 animate-pulse">
+          <div className="w-40 h-4 bg-bg-secondary rounded"></div>
+        </div>
+
+        {/* Header section skeleton */}
+        <header className="py-16 px-8 flex justify-center bg-bg-secondary/40 border-b border-border-color mt-4 animate-pulse">
+          <div className="max-w-4xl w-full">
+            <div className="w-24 h-4 bg-bg-secondary rounded mb-4"></div>
+            <div className="w-3/4 h-16 bg-bg-secondary rounded mb-6"></div>
+            
+            {/* Tech badges skeleton */}
+            <div className="flex gap-2 mb-8">
+              <div className="w-16 h-6 bg-bg-secondary rounded-full"></div>
+              <div className="w-20 h-6 bg-bg-secondary rounded-full"></div>
+              <div className="w-14 h-6 bg-bg-secondary rounded-full"></div>
+            </div>
+
+            {/* Author and links skeleton */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-t border-border-color pt-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-bg-secondary"></div>
+                <div className="flex flex-col gap-2">
+                  <div className="w-12 h-3 bg-bg-secondary rounded"></div>
+                  <div className="w-24 h-4 bg-bg-secondary rounded"></div>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="w-36 h-10 bg-bg-secondary rounded-lg"></div>
+                <div className="w-36 h-10 bg-bg-secondary rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Content skeleton */}
+        <div className="max-w-4xl mx-auto px-8 py-16 w-full flex flex-col md:flex-row gap-12 animate-pulse">
+          <div className="flex-1 min-w-0">
+            {/* Cover image skeleton */}
+            <div className="w-full h-72 md:h-96 bg-bg-secondary rounded-2xl mb-10 border border-border-color"></div>
+            
+            {/* Description skeleton */}
+            <div className="w-full h-6 bg-bg-secondary rounded mb-4"></div>
+            <div className="w-5/6 h-6 bg-bg-secondary rounded mb-10"></div>
+            
+            {/* Body text paragraphs skeleton */}
+            <div className="flex flex-col gap-4">
+              <div className="w-full h-4 bg-bg-secondary rounded"></div>
+              <div className="w-full h-4 bg-bg-secondary rounded"></div>
+              <div className="w-4/5 h-4 bg-bg-secondary rounded"></div>
+              <div className="w-full h-4 bg-bg-secondary rounded mt-4"></div>
+              <div className="w-full h-4 bg-bg-secondary rounded"></div>
+              <div className="w-3/4 h-4 bg-bg-secondary rounded"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   if (!project) {

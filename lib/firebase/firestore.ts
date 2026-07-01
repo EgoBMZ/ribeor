@@ -152,3 +152,11 @@ export async function incrementPostViews(slug: string): Promise<void> {
     views: increment(1)
   });
 }
+
+export async function incrementProjectViews(slug: string): Promise<void> {
+  const docRef = doc(db, PROJECTS_COLLECTION, slug);
+  await updateDoc(docRef, {
+    views: increment(1)
+  });
+}
+
