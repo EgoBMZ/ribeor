@@ -72,14 +72,7 @@ export function AuthButton() {
                   <LayoutDashboard size={16} />
                   Panel de Admin
                 </Link>
-                <Link
-                  href="/admin/posts/new"
-                  onClick={() => setDropdownOpen(false)}
-                  className="w-full text-left px-4 py-2 text-sm text-text-primary hover:bg-bg-secondary transition-colors font-semibold flex items-center gap-2"
-                >
-                  <FileText size={16} />
-                  Crear Post
-                </Link>
+
                 <Link
                   href="/admin/projects/new"
                   onClick={() => setDropdownOpen(false)}

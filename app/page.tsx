@@ -25,10 +25,31 @@ const InstagramIcon = ({ size = 16 }: { size?: number }) => (
 );
 
 const STACK_MARQUEE = [
-  "React", "React Native", "TypeScript", "Next.js", "Node.js", "Python",
-  "OpenAI", "AWS", "PostgreSQL", "Docker", "GraphQL", "Figma",
-  "React", "React Native", "TypeScript", "Next.js", "Node.js", "Python",
-  "OpenAI", "AWS", "PostgreSQL", "Docker", "GraphQL", "Figma",
+  { name: "React", slug: "react" },
+  { name: "React Native", slug: "react" },
+  { name: "TypeScript", slug: "typescript" },
+  { name: "Next.js", slug: "nextdotjs" },
+  { name: "Expo", slug: "expo" },
+  { name: "Node.js", slug: "nodedotjs" },
+  { name: "Python", slug: "python" },
+  { name: "AWS", slug: "amazonaws" },
+  { name: "PostgreSQL", slug: "postgresql" },
+  { name: "Docker", slug: "docker" },
+  { name: "GraphQL", slug: "graphql" },
+  { name: "Figma", slug: "figma" },
+  // duplicated so the marquee loops seamlessly
+  { name: "React", slug: "react" },
+  { name: "React Native", slug: "react" },
+  { name: "TypeScript", slug: "typescript" },
+  { name: "Next.js", slug: "nextdotjs" },
+  { name: "Expo", slug: "expo" },
+  { name: "Node.js", slug: "nodedotjs" },
+  { name: "Python", slug: "python" },
+  { name: "AWS", slug: "amazonaws" },
+  { name: "PostgreSQL", slug: "postgresql" },
+  { name: "Docker", slug: "docker" },
+  { name: "GraphQL", slug: "graphql" },
+  { name: "Figma", slug: "figma" },
 ];
 
 const ICONS = [<Smartphone key="sm" size={26} />, <Code2 key="c2" size={26} />, <Cpu key="cpu" size={26} />];
@@ -312,14 +333,23 @@ export default function Home() {
       >
         <div className="flex gap-10 animate-marquee w-max">
           {STACK_MARQUEE.map((tech, i) => (
-            <span
+            <div
               key={i}
-              className="text-[11px] uppercase tracking-widest font-bold whitespace-nowrap flex items-center gap-3"
-              style={{ color: "var(--text-meta)" }}
+              className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300"
             >
-              <span style={{ color: "var(--accent-lime)" }}>›</span>
-              {tech}
-            </span>
+              <img 
+                src={`https://cdn.simpleicons.org/${tech.slug}/94A3B8`} 
+                alt={tech.name} 
+                className="h-5 w-auto"
+              />
+              <span
+                className="text-[11px] uppercase tracking-widest font-bold whitespace-nowrap"
+                style={{ color: "var(--text-meta)" }}
+              >
+                {tech.name}
+              </span>
+              <span className="ml-6" style={{ color: "var(--accent-lime)", opacity: 0.5 }}>›</span>
+            </div>
           ))}
         </div>
       </div>
