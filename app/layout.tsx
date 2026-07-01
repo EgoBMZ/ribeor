@@ -5,6 +5,7 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import { AuthProvider } from "../components/AuthProvider";
 import { Header } from "../components/Header";
 import { VisitTracker } from "../components/VisitTracker";
+import { TranslationsProvider } from "../lib/i18n/TranslationsProvider";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -17,8 +18,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ribeor | Diego Berrío",
-  description: "Portafolio y Blog de Diego Berrío (egobmz), Desarrollador Frontend y Mobile.",
+  title: "Diego Berríos — Ribeor | Digital Artisan",
+  description: "Software Engineer con 7+ años de experiencia construyendo apps web y móviles. Founder @ Ribeor. React, React Native, TypeScript, Expo.",
 };
 
 export default function RootLayout({
@@ -33,16 +34,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
-            <VisitTracker />
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <div className="flex-1">
-                {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <TranslationsProvider>
+            <AuthProvider>
+              <VisitTracker />
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <div className="flex-1">
+                  {children}
+                </div>
               </div>
-            </div>
-          </AuthProvider>
+            </AuthProvider>
+          </TranslationsProvider>
         </ThemeProvider>
       </body>
     </html>

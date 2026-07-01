@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "hire": "Hire me",
+    "admin": "Admin"
+  },
+  "hero": {
+    "badge": "Digital Artisan · Founder of Ribeor",
+    "tagline_1": "Turning complex",
+    "tagline_2": "ideas into",
+    "tagline_3": "digital assets.",
+    "bio_strong": "Software Engineer with 7+ years of experience",
+    "bio_rest": " building scalable web and mobile applications. I'm involved in the full development cycle, from architecture to delivery, integrating AI into every product I build.",
+    "cta_projects": "View Projects",
+    "cta_site": "Go to Ribeor.com",
+    "stack_label": "My tech stack",
+    "role": "Ribeor Founder",
+    "role_sub": "Conversion-oriented product engineering · Applied AI",
+    "stat_years": "Years",
+    "stat_industries": "Industries",
+    "stat_ai": "AI Integrated"
+  },
+  "services": {
+    "label": "Services",
+    "heading_1": "What I",
+    "heading_2": "build",
+    "subheading": "I'm involved in the full cycle — from component architecture to final delivery with AI integration.",
+    "items": [
+      {
+        "title": "Mobile Apps",
+        "subtitle": "Expo · React Native",
+        "description": "iOS and Android apps with smooth native interfaces. From Figma prototype to app store publication."
+      },
+      {
+        "title": "Web Development",
+        "subtitle": "React · Next.js · TypeScript",
+        "description": "Modern, fast, and scalable web platforms. Solid architecture, optimized SEO, and top-level performance."
+      },
+      {
+        "title": "Applied AI to Products",
+        "subtitle": "Applied AI · Automation",
+        "description": "Integration of AI workflows to create smarter, automated, and conversion-oriented product experiences."
+      }
+    ]
+  },
+  "about": {
+    "label": "About me",
+    "tagline_1": "Engineering",
+    "tagline_2": "digital products,",
+    "tagline_3": "from concept to scale.",
+    "cta": "View professional profile",
+    "bio_1_strong": "Software Developer with 7+ years of experience",
+    "bio_1_rest": " building scalable web and mobile applications. I've worked across multiple industries — government platforms, startups, and my own products — using React, React Native, and TypeScript as my primary stack.",
+    "bio_2_start": "I'm involved in the full development cycle: from component architecture and API integration to final delivery and technical support. I currently incorporate ",
+    "bio_2_highlight": "AI workflows",
+    "bio_2_end": " into my projects to build smarter and more automated experiences.",
+    "highlights": [
+      { "label": "Government", "note": "Institutional platforms" },
+      { "label": "Startups", "note": "Product zero to one" },
+      { "label": "Integrated AI", "note": "React + TypeScript" }
+    ]
+  },
+  "projects_cta": {
+    "label": "Portfolio",
+    "heading_1": "Built",
+    "heading_2": "projects",
+    "description": "Mobile apps, web platforms, and technical experiments. Every project is an idea turned into a real product.",
+    "cta": "View all projects"
+  },
+  "projects_page": {
+    "label": "Portfolio · EgoBMZ",
+    "heading": "Projects",
+    "description": "Mobile apps, web platforms, and technical experiments. Ideas turned into real products with React, React Native, TypeScript and Expo.",
+    "empty_heading": "No projects yet",
+    "empty_sub": "New projects will be added soon.",
+    "tech_label": "Technologies",
+    "views_label": "views",
+    "repo_label": "Code",
+    "live_label": "Live demo"
+  },
+  "footer": {
+    "tagline": "Turning complex ideas into digital assets.",
+    "rights": "All rights reserved."
+  }
+}

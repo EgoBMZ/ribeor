@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import { Project, getProjects } from "../../lib/firebase/firestore";
 import Link from "next/link";
 import { Code2, Globe, FolderGit2 } from "lucide-react";
+import { useTranslations } from "../../lib/i18n/TranslationsProvider";
 
 export default function ProyectosPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslations();
+  const pg = t.projects_page;
 
   useEffect(() => {
     async function fetchProjects() {
@@ -24,11 +27,17 @@ export default function ProyectosPage() {
   }, []);
 
   return (
-    <main className="px-8 py-16 max-w-7xl mx-auto w-full">
+    <main className="px-6 md:px-12 py-16 max-w-7xl mx-auto w-full">
       <header className="mb-16">
-        <h1 className="text-6xl md:text-8xl mb-4 font-oswald text-text-primary tracking-tighter">PROYECTOS</h1>
-        <p className="text-xl max-w-2xl text-text-secondary">
-          Una colección de aplicaciones web, móviles y experimentos técnicos construidos con tecnologías modernas.
+        <span
+          className="text-xs uppercase tracking-widest font-bold block mb-4"
+          style={{ color: "var(--accent-lime)" }}
+        >
+          {pg.label}
+        </span>
+        <h1 className="text-6xl md:text-8xl mb-6 font-oswald text-text-primary tracking-tighter">{pg.heading}</h1>
+        <p className="text-xl max-w-2xl" style={{ color: "var(--text-secondary)" }}>
+          {pg.description}
         </p>
       </header>
 

@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "hire": "Contratar",
+    "admin": "Admin"
+  },
+  "hero": {
+    "badge": "Artesano Digital · Fundador de Ribeor",
+    "tagline_1": "Convierto ideas",
+    "tagline_2": "complejas en",
+    "tagline_3": "activos digitales.",
+    "bio_strong": "Ingeniero de software con más de 7 años de experiencia",
+    "bio_rest": " construyendo aplicaciones web y móviles escalables. Me involucro en todo el ciclo de desarrollo, desde la arquitectura hasta la entrega, incorporando IA en cada producto que construyo.",
+    "cta_projects": "Ver Proyectos",
+    "cta_site": "Ir a Ribeor.com",
+    "stack_label": "Tecnologías que domino",
+    "role": "Fundador de Ribeor",
+    "role_sub": "Ingeniería de producto orientada a conversión · IA aplicada",
+    "stat_years": "Años",
+    "stat_industries": "Industrias",
+    "stat_ai": "IA Integrada"
+  },
+  "services": {
+    "label": "Servicios",
+    "heading_1": "Lo que",
+    "heading_2": "construyo",
+    "subheading": "Me involucro en todo el ciclo — desde la arquitectura de componentes hasta la entrega final con integración de IA.",
+    "items": [
+      {
+        "title": "Apps Móviles",
+        "subtitle": "Expo · React Native",
+        "description": "Aplicaciones iOS y Android con interfaces nativas fluidas. Desde el prototipo en Figma hasta la publicación en las tiendas."
+      },
+      {
+        "title": "Desarrollo Web",
+        "subtitle": "React · Next.js · TypeScript",
+        "description": "Plataformas web modernas, rápidas y escalables. Arquitectura sólida, SEO optimizado y rendimiento de alto nivel."
+      },
+      {
+        "title": "IA Aplicada a Productos",
+        "subtitle": "IA Aplicada · Automatización",
+        "description": "Integración de flujos de inteligencia artificial para crear experiencias más inteligentes, automatizadas y orientadas a conversión."
+      }
+    ]
+  },
+  "about": {
+    "label": "Sobre mí",
+    "tagline_1": "Ingeniería de",
+    "tagline_2": "productos digitales,",
+    "tagline_3": "del concepto a la escala.",
+    "cta": "Ver perfil profesional",
+    "bio_1_strong": "Desarrollador de software con más de 7 años de experiencia",
+    "bio_1_rest": " construyendo aplicaciones web y móviles escalables. He trabajado en proyectos de múltiples industrias — plataformas gubernamentales, startups y productos propios — usando React, React Native y TypeScript como stack principal.",
+    "bio_2_start": "Me involucro en todo el ciclo de desarrollo: desde la arquitectura de componentes y la integración con APIs, hasta la entrega final y el soporte técnico. Actualmente incorporo ",
+    "bio_2_highlight": "flujos de inteligencia artificial",
+    "bio_2_end": " en mis proyectos para construir experiencias más inteligentes y automatizadas.",
+    "highlights": [
+      { "label": "Gobierno", "note": "Plataformas institucionales" },
+      { "label": "Startups", "note": "Producto de cero a uno" },
+      { "label": "IA Integrada", "note": "React + TypeScript" }
+    ]
+  },
+  "projects_cta": {
+    "label": "Portafolio",
+    "heading_1": "Proyectos",
+    "heading_2": "construidos",
+    "description": "Apps móviles, plataformas web y experimentos técnicos. Cada proyecto es una idea convertida en producto real.",
+    "cta": "Ver todos los proyectos"
+  },
+  "projects_page": {
+    "label": "Portafolio · EgoBMZ",
+    "heading": "Proyectos",
+    "description": "Apps móviles, plataformas web y experimentos técnicos. Ideas convertidas en productos reales con React, React Native, TypeScript y Expo.",
+    "empty_heading": "Aún no hay proyectos",
+    "empty_sub": "Pronto se añadirán nuevos proyectos.",
+    "tech_label": "Tecnologías",
+    "views_label": "vistas",
+    "repo_label": "Código",
+    "live_label": "Ver en vivo"
+  },
+  "footer": {
+    "tagline": "Convierto ideas complejas en activos digitales.",
+    "rights": "Todos los derechos reservados."
+  }
+}
