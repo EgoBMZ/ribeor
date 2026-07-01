@@ -1,29 +1,42 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-meta: var(--text-meta);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-purple: var(--accent-purple);
+  --color-border-color: var(--border-color);
+  
+  --font-oswald: var(--font-oswald), sans-serif;
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+}
+
 /* =========================================
    VARIABLES GLOBALES (TEMA CLARO)
    ========================================= */
 :root {
-  /* Fondos */
   --bg-primary: #FFFFFF;
   --bg-secondary: #F4E8D6;
   --bg-card: #F9F9F9;
 
-  /* Textos */
   --text-primary: #111111;
   --text-secondary: #444444;
   --text-meta: #888888;
 
-  /* Colores de Acento */
   --accent-pink: #FF3366;
   --accent-purple: #635BFF;
 
-  /* Interfaz */
   --border-color: #EAEAEA;
 }
 
 /* =========================================
    TEMA OSCURO
    ========================================= */
-[data-theme="dark"] {
+.dark {
   --bg-primary: #121212;
   --bg-secondary: #1E1E1E;
   --bg-card: #242424;
@@ -38,77 +51,17 @@
   --border-color: #333333;
 }
 
-/* =========================================
-   APLICACIÓN GLOBAL
-   ========================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-secondary);
-  font-family: var(--font-inter), system-ui, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
-  font-family: var(--font-oswald), sans-serif;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-/* Utilidades básicas UI */
-.card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 24px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: var(--font-inter), sans-serif;
-}
-
-.btn-primary {
-  background-color: var(--accent-pink);
-  color: #FFFFFF;
-  border: 2px solid var(--accent-pink);
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--accent-pink);
-  border: 2px solid var(--accent-pink);
-}
-
-.btn-outline:hover {
-  background-color: var(--accent-pink);
-  color: #FFFFFF;
-}
-
-.metadata {
-  font-size: 0.85rem;
-  color: var(--text-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
+/* Base global application styles */
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+  
+  body {
+    @apply bg-bg-primary text-text-secondary font-inter transition-colors duration-300 ease-in-out leading-relaxed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-text-primary font-oswald uppercase font-bold tracking-tight leading-tight;
+  }
 }
