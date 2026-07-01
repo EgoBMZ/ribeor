@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
+import { AuthProvider } from "../components/AuthProvider";
+import { Header } from "../components/Header";
+import { VisitTracker } from "../components/VisitTracker";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -31,7 +34,15 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <AuthProvider>
+            <VisitTracker />
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <div className="flex-1">
+                {children}
+              </div>
+            </div>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

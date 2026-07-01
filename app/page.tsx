@@ -2,18 +2,7 @@ import { ThemeToggle } from "../components/ThemeToggle";
 
 export default function Home() {
   return (
-    <main className="px-8 py-16 max-w-7xl mx-auto">
-      {/* Header */}
-      <header className="flex justify-between items-center mb-16">
-        <h2 className="text-3xl m-0 tracking-tighter">RIBEOR</h2>
-        <nav className="flex gap-8 items-center">
-          <a href="#" className="text-sm text-text-meta uppercase tracking-wider font-semibold hover:text-accent-pink transition-colors">Proyectos</a>
-          <a href="#" className="text-sm text-text-meta uppercase tracking-wider font-semibold hover:text-accent-pink transition-colors">Blog</a>
-          <a href="#" className="text-sm text-text-meta uppercase tracking-wider font-semibold hover:text-accent-pink transition-colors">Apps</a>
-          <ThemeToggle />
-        </nav>
-      </header>
-
+    <main className="px-8 pb-16 max-w-7xl mx-auto">
       {/* Hero Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-24">
         <div>
