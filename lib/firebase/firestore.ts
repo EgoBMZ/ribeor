@@ -1,60 +1,6 @@
 import { collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, orderBy, Timestamp, increment } from "firebase/firestore";
 import { db } from "./config";
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string; // Markdown content
-  coverImage?: string;
-  authorId: string;
-  authorName: string;
-  createdAt: Timestamp;
-  views?: number;
-}
-
-const COLLECTION_NAME = "posts";
-
-export async function getPosts(): Promise<BlogPost[]> {
-  const q = query(collection(db, COLLECTION_NAME), orderBy("createdAt", "desc"));
-  const querySnapshot = await getDocs(q);
-  
-  return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  })) as BlogPost[];
-}
-
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const docRef = doc(db, COLLECTION_NAME, slug);
-  const docSnap = await getDoc(docRef);
-  
-  if (docSnap.exists()) {
-    return { id: docSnap.id, ...docSnap.data() } as BlogPost;
-  }
-  
-  return null;
-}
-
-export async function createPost(postData: Omit<BlogPost, "id" | "createdAt">): Promise<void> {
-  // Use slug as the document ID for easy querying by slug
-  const docRef = doc(collection(db, COLLECTION_NAME), postData.slug);
-  await setDoc(docRef, {
-    ...postData,
-    createdAt: Timestamp.now(),
-  });
-}
-
-export async function updatePost(slug: string, postData: Partial<BlogPost>): Promise<void> {
-  const docRef = doc(db, COLLECTION_NAME, slug);
-  await updateDoc(docRef, postData);
-}
-
-export async function deletePost(slug: string): Promise<void> {
-  const docRef = doc(db, COLLECTION_NAME, slug);
-  await deleteDoc(docRef);
-}
 
 // PROJECTS
 export interface Project {
@@ -146,12 +92,7 @@ export async function getUsersCount(): Promise<number> {
   return querySnapshot.size;
 }
 
-export async function incrementPostViews(slug: string): Promise<void> {
-  const docRef = doc(db, COLLECTION_NAME, slug);
-  await updateDoc(docRef, {
-    views: increment(1)
-  });
-}
+
 
 export async function incrementProjectViews(slug: string): Promise<void> {
   const docRef = doc(db, PROJECTS_COLLECTION, slug);

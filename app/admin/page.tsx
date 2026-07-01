@@ -5,9 +5,7 @@ import Link from "next/link";
 import { 
   getGlobalVisits, 
   getUsersCount, 
-  getPosts, 
   getProjects, 
-  BlogPost, 
   Project 
 } from "../../lib/firebase/firestore";
 import { 
@@ -23,22 +21,19 @@ import {
 export default function AdminDashboardPage() {
   const [visits, setVisits] = useState<number>(0);
   const [usersCount, setUsersCount] = useState<number>(0);
-  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadStats() {
       try {
-        const [v, u, pts, prjs] = await Promise.all([
+        const [v, u, prjs] = await Promise.all([
           getGlobalVisits(),
           getUsersCount(),
-          getPosts(),
           getProjects()
         ]);
         setVisits(v);
         setUsersCount(u);
-        setPosts(pts);
         setProjects(prjs);
       } catch (error) {
         console.error("Error loading stats:", error);
@@ -49,11 +44,6 @@ export default function AdminDashboardPage() {
     loadStats();
   }, []);
 
-  // Sort posts by views to find the top ones
-  const topPosts = [...posts]
-    .filter(post => post.views && post.views > 0)
-    .sort((a, b) => (b.views || 0) - (a.views || 0))
-    .slice(0, 5);
 
   // Sort projects by views to find the top ones
   const topProjects = [...projects]
@@ -75,13 +65,6 @@ export default function AdminDashboardPage() {
       icon: <Users className="text-accent-purple" size={24} />, 
       bg: "bg-accent-purple/10",
       description: "Logueados con Google"
-    },
-    { 
-      name: "Artículos Publicados", 
-      value: posts.length, 
-      icon: <FileText className="text-blue-500" size={24} />, 
-      bg: "bg-blue-500/10",
-      description: "En el blog público"
     },
     { 
       name: "Proyectos Añadidos", 
@@ -134,87 +117,41 @@ export default function AdminDashboardPage() {
       {/* Main Content Sections */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Top Posts Table */}
-        {/* Top Content (Posts & Projects) */}
-        <div className="lg:col-span-2 flex flex-col gap-6 p-6 rounded-2xl border border-border-color bg-bg-primary">
+        {/* Top Content (Projects) */}
+        <div className="lg:col-span-2 flex flex-col gap-4 p-6 rounded-2xl border border-border-color bg-bg-primary">
           <h2 className="text-xl font-bold text-text-primary flex items-center gap-2 border-b border-border-color pb-4">
-            <Eye size={20} className="text-accent-pink animate-pulse" /> Rendimiento de Contenido (Top 5)
+            <Eye size={20} className="text-accent-purple animate-pulse" /> Rendimiento de Proyectos (Top 5)
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Column 1: Top Posts */}
-            <div className="flex flex-col gap-4">
-              <h3 className="text-sm uppercase font-bold tracking-wider text-text-meta flex items-center gap-2">
-                <FileText size={16} className="text-accent-pink" /> Artículos más leídos
-              </h3>
-              {topPosts.length === 0 ? (
-                <div className="py-8 text-center text-text-secondary text-xs border border-dashed border-border-color rounded-xl">
-                  Aún no hay vistas registradas en tus artículos.
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
-                    <thead>
-                      <tr className="border-b border-border-color text-text-meta uppercase text-[10px] tracking-wider">
-                        <th className="pb-2 font-bold">Artículo</th>
-                        <th className="pb-2 font-bold text-right">Vistas</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border-color">
-                      {topPosts.map((post, i) => (
-                        <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
-                          <td className="py-2.5 font-medium text-text-primary max-w-[150px] sm:max-w-[200px] truncate">
-                            <Link href={`/blog/${post.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
-                              {post.title} <ArrowUpRight size={12} className="opacity-40" />
-                            </Link>
-                          </td>
-                          <td className="py-2.5 text-right font-bold text-accent-pink font-mono text-sm">
-                            {post.views || 0}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+          {topProjects.length === 0 ? (
+            <div className="py-10 text-center text-text-secondary text-sm border border-dashed border-border-color rounded-xl mt-2">
+              Aún no hay visualizaciones registradas en tus proyectos.
             </div>
-
-            {/* Column 2: Top Projects */}
-            <div className="flex flex-col gap-4">
-              <h3 className="text-sm uppercase font-bold tracking-wider text-text-meta flex items-center gap-2">
-                <FolderGit2 size={16} className="text-accent-purple" /> Proyectos más vistos
-              </h3>
-              {topProjects.length === 0 ? (
-                <div className="py-8 text-center text-text-secondary text-xs border border-dashed border-border-color rounded-xl">
-                  Aún no hay vistas registradas en tus proyectos.
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
-                    <thead>
-                      <tr className="border-b border-border-color text-text-meta uppercase text-[10px] tracking-wider">
-                        <th className="pb-2 font-bold">Proyecto</th>
-                        <th className="pb-2 font-bold text-right">Vistas</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border-color">
-                      {topProjects.map((project, i) => (
-                        <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
-                          <td className="py-2.5 font-medium text-text-primary max-w-[150px] sm:max-w-[200px] truncate">
-                            <Link href={`/proyectos/${project.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
-                              {project.title} <ArrowUpRight size={12} className="opacity-40" />
-                            </Link>
-                          </td>
-                          <td className="py-2.5 text-right font-bold text-accent-purple font-mono text-sm">
-                            {project.views || 0}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+          ) : (
+            <div className="overflow-x-auto mt-2">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border-color text-text-meta uppercase text-xs tracking-wider">
+                    <th className="pb-3 font-bold">Proyecto</th>
+                    <th className="pb-3 font-bold text-right">Visualizaciones</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border-color">
+                  {topProjects.map((project, i) => (
+                    <tr key={i} className="hover:bg-bg-secondary/40 transition-colors">
+                      <td className="py-3 font-medium text-text-primary max-w-xs sm:max-w-sm truncate">
+                        <Link href={`/proyectos/${project.slug}`} target="_blank" className="hover:underline flex items-center gap-1">
+                          {project.title} <ArrowUpRight size={14} className="opacity-40" />
+                        </Link>
+                      </td>
+                      <td className="py-3 text-right font-bold text-accent-purple font-mono text-base">
+                        {project.views || 0}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Quick Actions Panel */}
@@ -223,16 +160,6 @@ export default function AdminDashboardPage() {
           <p className="text-xs text-text-secondary mb-2">Comienza a publicar contenido nuevo de inmediato.</p>
           
           <div className="flex flex-col gap-3">
-            <Link 
-              href="/admin/posts/new"
-              className="flex items-center justify-between p-4 rounded-xl border border-border-color bg-bg-secondary/30 hover:border-accent-pink transition-colors font-semibold text-sm group"
-            >
-              <span className="flex items-center gap-2">
-                <FileText size={18} className="text-accent-pink" />
-                Redactar Artículo
-              </span>
-              <Plus size={16} className="opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all" />
-            </Link>
 
             <Link 
               href="/admin/projects/new"

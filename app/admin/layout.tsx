@@ -27,7 +27,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { name: "Dashboard", href: "/admin", exact: true, icon: <LayoutDashboard size={18} /> },
-    { name: "Posts", href: "/admin/posts", exact: false, icon: <FileText size={18} /> },
     { name: "Proyectos", href: "/admin/projects", exact: false, icon: <FolderGit2 size={18} /> },
   ];
 
