@@ -18,8 +18,63 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Diego Berríos — Ribeor | Digital Artisan",
-  description: "Software Engineer con 7+ años de experiencia construyendo apps web y móviles. Founder @ Ribeor. React, React Native, TypeScript, Expo.",
+  metadataBase: new URL("https://ribeor.com"),
+  title: {
+    default: "Diego Berrio — Ribeor | Digital Artisan",
+    template: "%s | Diego Berrio"
+  },
+  description: "Ingeniero de software con más de 7 años de experiencia construyendo aplicaciones web y móviles de alto rendimiento. Especializado en React, React Native, TypeScript y Expo. Founder @ Ribeor.",
+  keywords: [
+    "Diego Berrio",
+    "EgoBMZ",
+    "Ribeor",
+    "Software Engineer",
+    "React Native",
+    "React",
+    "TypeScript",
+    "Expo",
+    "Next.js",
+    "Desarrollador Web",
+    "Mobile Developer",
+    "AI Integration",
+    "UI UX"
+  ],
+  authors: [{ name: "Diego Berrio", url: "https://ribeor.com" }],
+  creator: "Diego Berrio",
+  openGraph: {
+    type: "website",
+    locale: "es_LA",
+    url: "https://ribeor.com",
+    siteName: "Diego Berrio — Ribeor",
+    title: "Diego Berrio — Ribeor | Digital Artisan",
+    description: "Ingeniero de software con más de 7 años de experiencia construyendo aplicaciones web y móviles de alto rendimiento. Especializado en React, React Native, TypeScript y Expo. Founder @ Ribeor.",
+    images: [
+      {
+        url: "https://avatars.githubusercontent.com/u/297014950?v=4",
+        width: 460,
+        height: 460,
+        alt: "Diego Berrio — Ribeor"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary",
+    title: "Diego Berrio — Ribeor | Digital Artisan",
+    description: "Ingeniero de software con más de 7 años de experiencia construyendo aplicaciones web y móviles de alto rendimiento. Especializado en React, React Native, TypeScript y Expo. Founder @ Ribeor.",
+    creator: "@EgoBMZ",
+    images: ["https://avatars.githubusercontent.com/u/297014950?v=4"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  }
 };
 
 export default function RootLayout({
